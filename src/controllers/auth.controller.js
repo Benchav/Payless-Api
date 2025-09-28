@@ -30,9 +30,10 @@ async function register(req, res, next) {
   }
 }
 
+
 async function login(req, res, next) {
   try {
-    const { username, password } = req.body;
+    const { username, password, expectedRole } = req.body; // <-- expectedRole opcional
     if (!username || !password) {
       return res.status(400).json({ message: 'Username y password requeridos' });
     }
@@ -42,6 +43,14 @@ async function login(req, res, next) {
 
     const isValid = bcrypt.compareSync(password, user.passwordHash);
     if (!isValid) return res.status(401).json({ message: 'Credenciales inválidas' });
+
+    // Si el cliente envía expectedRole, exigir coincidencia (salvo super-roles)
+    if (expectedRole) {
+      // permitir super-roles siempre
+      if (user.role !== expectedRole && user.role !== 'managua' && user.role !== 'admin') {
+        return res.status(403).json({ message: 'No tienes permiso para iniciar sesión en este panel' });
+      }
+    }
 
     const payload = { sub: user.id, username: user.username, role: user.role };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
@@ -57,5 +66,6 @@ async function login(req, res, next) {
     return res.status(500).json({ message: 'Error en login' });
   }
 }
+
 
 module.exports = { register, login };

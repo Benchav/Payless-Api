@@ -42,9 +42,12 @@ router.post('/register', validateBody(registerSchema), authController.register);
  *             properties:
  *               username: { type: string }
  *               password: { type: string }
+ *               expectedRole: { type: string, enum: [ "managua","jinotepe","chontales","masaya","admin" ], description: "Opcional. Rol del panel desde el que se intenta iniciar sesión. Si se pasa y no coincide con el rol del usuario (salvo managua/admin), se rechaza el login." }
  *     responses:
  *       200:
  *         description: Devuelve token JWT y role
+ *       403:
+ *         description: Usuario no autorizado para iniciar sesión en este panel
  */
 router.post('/login', validateBody(loginSchema), authController.login);
 
