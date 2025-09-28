@@ -1,0 +1,32 @@
+{
+  "name": "payless-api",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "echo \"No build step\"",
+    "test": "echo \"No tests\" && exit 0"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "firebase-admin": "^13.5.0",
+    "helmet": "^6.0.1",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
