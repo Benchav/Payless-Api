@@ -13,14 +13,14 @@ async function _getAllFromCollection(collectionName) {
 
 async function getAllByCity() {
   // Ejecutar las 3 consultas en paralelo
-  const [jinotepe, chontales, masaya] = await Promise.all([
+  const [jinotepe, chontales, masaya, granada] = await Promise.all([
     _getAllFromCollection(COLL_JINOTEPE),
     _getAllFromCollection(COLL_CHONTALES),
     _getAllFromCollection(COLL_MASAYA),
     _getAllFromCollection(COLL_GRANADA),
   ]);
 
-  return { jinotepe, chontales, masaya };
+  return { jinotepe, chontales, masaya, granada };
 }
 
 module.exports = { getAllByCity };
