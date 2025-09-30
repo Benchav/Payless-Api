@@ -112,10 +112,10 @@ const options = {
 
 const swaggerSpec = swaggerJsdoc(options);
 
-// 🚀 Siempre disponible (local + producción)
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// --- Rutas públicas de autenticación ---
+
 app.use('/auth/login', authLimiter);
 app.use('/auth/register', authLimiter);
 app.use('/auth', authRoutes);

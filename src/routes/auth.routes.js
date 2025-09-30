@@ -20,7 +20,7 @@ const { registerSchema, loginSchema } = require('../models/user.schema');
  *             properties:
  *               username: { type: string }
  *               password: { type: string }
- *               role: { type: string, enum: [ "managua","jinotepe","chontales","masaya","admin" ] }
+ *               role: { type: string, enum: [ "managua","jinotepe","chontales","masaya","granada","admin" ] }
  *     responses:
  *       201:
  *         description: Usuario creado
@@ -42,7 +42,7 @@ router.post('/register', validateBody(registerSchema), authController.register);
  *             properties:
  *               username: { type: string }
  *               password: { type: string }
- *               expectedRole: { type: string, enum: [ "managua","jinotepe","chontales","masaya","admin" ], description: "Opcional. Rol del panel desde el que se intenta iniciar sesión. Si se pasa y no coincide con el rol del usuario (salvo managua/admin), se rechaza el login." }
+ *               expectedRole: { type: string, enum: [ "managua","jinotepe","chontales","masaya","granada","admin" ], description: "Opcional. Rol del panel desde el que se intenta iniciar sesión. Si se pasa y no coincide con el rol del usuario (salvo managua/admin), se rechaza el login." }
  *     responses:
  *       200:
  *         description: Devuelve token JWT y role

@@ -4,6 +4,7 @@ const db = require('../config/firebase');
 const COLL_JINOTEPE = 'jinotepe';
 const COLL_CHONTALES = 'chontales';
 const COLL_MASAYA = 'masaya';
+const COLL_GRANADA = 'granada';
 
 async function _getAllFromCollection(collectionName) {
   const snapshot = await db.collection(collectionName).get();
@@ -15,7 +16,8 @@ async function getAllByCity() {
   const [jinotepe, chontales, masaya] = await Promise.all([
     _getAllFromCollection(COLL_JINOTEPE),
     _getAllFromCollection(COLL_CHONTALES),
-    _getAllFromCollection(COLL_MASAYA)
+    _getAllFromCollection(COLL_MASAYA),
+    _getAllFromCollection(COLL_GRANADA),
   ]);
 
   return { jinotepe, chontales, masaya };

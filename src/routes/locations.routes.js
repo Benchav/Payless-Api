@@ -5,6 +5,7 @@ const managuaController = require('../controllers/managua.controller');
 const jinotepeController = require('../controllers/jinotepe.controller');
 const chontalesController = require('../controllers/chontales.controller');
 const masayaController = require('../controllers/masaya.controller');
+const granadaController = require('../controllers/granada.controller')
 
 const authorize = require('../middleware/authorize.middleware');
 
@@ -23,7 +24,7 @@ const { newShoeSchema, updateShoeSchema } = require('../models/shoe.schema');
  * @openapi
  * /api/managua:
  *   get:
- *     summary: Obtener todos los zapatos de todas las ciudades (Jinotepe, Chontales, Masaya)
+ *     summary: Obtener todos los zapatos de todas las ciudades (Jinotepe, Chontales, Masaya, Granada)
  *     responses:
  *       200:
  *         description: Listado agregado por ciudad
@@ -41,6 +42,10 @@ const { newShoeSchema, updateShoeSchema } = require('../models/shoe.schema');
  *                   items:
  *                     $ref: '#/components/schemas/Shoe'
  *                 masaya:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Shoe'
+ *                 granada:
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Shoe'
@@ -240,5 +245,68 @@ router.post('/masaya', validateBody(newShoeSchema), authorize('masaya'), masayaC
  */
 router.put('/masaya/:id', validateBody(updateShoeSchema), authorize('masaya'), masayaController.updateMasaya);
 router.delete('/masaya/:id', authorize('masaya'), masayaController.deleteMasaya);
+
+
+/**
+ * @openapi
+ * /api/granada:
+ *   get:
+ *     summary: Listar zapatos de Masaya
+ *     responses:
+ *       200:
+ *         description: Lista de zapatos
+ *   post:
+ *     summary: Crear un nuevo zapato en Masaya
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/NewShoe'
+ *     responses:
+ *       201:
+ *         description: Zapato creado
+ */
+router.get('/granada', authorize('granada'), granadaController.getGranada);
+router.post('/granada', validateBody(newShoeSchema), authorize('granada'), granadaController.createGranada);
+
+/**
+ * @openapi
+ * /api/granada/{id}:
+ *   put:
+ *     summary: Actualizar un zapato en Granada
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/NewShoe'
+ *     responses:
+ *       200:
+ *         description: Zapato actualizado
+ *       404:
+ *         description: No encontrado
+ *   delete:
+ *     summary: Eliminar un zapato en Masaya
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Eliminado
+ *       404:
+ *         description: No encontrado
+ */
+router.put('/granada/:id', validateBody(updateShoeSchema), authorize('granada'), granadaController.updateGranada);
+router.delete('/granada/:id', authorize('granada'), granadaController.deleteGranada);
 
 module.exports = router;
