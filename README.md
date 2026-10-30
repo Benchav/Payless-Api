@@ -341,7 +341,3 @@ Si cambias el dominio de producción, actualiza:
 
 - CORS_ORIGIN en las variables de entorno.
 - SERVER_URL si deseas que Swagger apunte al dominio correcto.
-
-## Licencia
-
-Proyecto privado o de uso interno, salvo que se indique lo contrario por el propietario.
